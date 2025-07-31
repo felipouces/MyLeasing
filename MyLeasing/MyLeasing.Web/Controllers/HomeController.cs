@@ -23,8 +23,24 @@ namespace MyLeasing.Web.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        //  Action para About
+        public IActionResult About()
         {
+            ViewData["Message"] = "Application information.";
+            return View();
+        }
+
+        //  Action para Contact
+        public IActionResult Contact()
+        {
+            ViewData["Message"] = "Contact Page.";
+            return View();
+        }
+
+        // Action para Owners
+        public IActionResult Owners()
+        {
+            ViewData["Message"] = "Owners page.";
             return View();
         }
 
