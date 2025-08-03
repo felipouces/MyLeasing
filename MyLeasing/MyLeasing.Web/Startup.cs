@@ -26,10 +26,16 @@ namespace MyLeasing.Web
         {
 
             // Register the DataContext with the dependency injection container
-            services.AddDbContext<DataContext>(options =>
-      options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            // services.AddDbContext<DataContext>(options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<DataContext>(cfg =>
+            {
+                cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             services.AddTransient<SeedDb>();
+            services.AddScoped<IRepository, Repository>();
 
 
             services.AddControllersWithViews();
