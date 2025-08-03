@@ -29,11 +29,14 @@ namespace MyLeasing.Web
             services.AddDbContext<DataContext>(options =>
       options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<SeedDb>();
+
+
             services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedDb seeder)
         {
             if (env.IsDevelopment())
             {
@@ -58,6 +61,18 @@ namespace MyLeasing.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
+            // Seed the database with initial data
+            try
+            {
+                seeder.SeedAsync().Wait();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while seeding the database: {ex.Message}");
+            }
+
         }
     }
 }
