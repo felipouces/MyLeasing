@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 
-
 namespace MyLeasing.Common.Entities
 {
-    public class Owner
+    public class Owner : IEntity
     {
 
         public int Id { get; set; }
